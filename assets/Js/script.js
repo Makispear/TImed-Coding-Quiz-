@@ -34,6 +34,7 @@ var validatorSection = document.querySelector(".validatorSection");
 var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
 var contentHolder = document.querySelector("#contentHolder");
+var main = document.querySelector("#main");
 var score = "";
 var dataId = 1;
 var questionsIndex = 0;
@@ -92,12 +93,23 @@ var createOptions = function() {
     }
 } 
 
+var stopTimer = function() {
+    if (targetEl.event === "#options17" ||
+    targetEl.event === "#options18" || 
+    targetEl.event === "#options19" || 
+    targetEl.event === "#options20") {
+        clearInterval(startCount)
+    }
+}
 
+var SetTimeInterval =  function() {
+        // START BTN 
+        questionsLoop()
+        createOptions()
+        var startBtn = document.querySelector("#startBtnHolder");
+        startBtn.remove()
 
-var taskButtonHandler = function(event) {
-    var targetEl = event.target;
-    // START BTN 
-    if (targetEl.matches("#startBtn")) {
+        // SetTimeInterval()
         // time here ---------------------------------
         var startingTime = timeLeft.textContent = 10;
         var countDown = startingTime;
@@ -105,15 +117,12 @@ var taskButtonHandler = function(event) {
             timeLeft.textContent = `Time Left: ${countDown}`;
             
             if (countDown > 0) {
-                if (targetEl.matches("#options17") ||
-                targetEl.matches("#options18") || 
-                targetEl.matches("#options19") || 
-                targetEl.matches("#options20")) {
-                    clearInterval(startCount)
-                }
-                countDown--;
+        
 
-            } else {
+                countDown--;
+            } else if (countDown === 0) {
+                clearInterval(startCount);
+                countDown = startingTime;
                 timeLeft.textContent = `Time's up`;
 
                 // CODE FOR SHOWING NEXT PAGE 
@@ -148,17 +157,21 @@ var taskButtonHandler = function(event) {
                 return countDown;
             }
         }, 1000)
-
-
-
-
-        //-------------------------------------------
-            questionsLoop()
-            createOptions()
-            var startBtn = document.querySelector("#startBtnHolder");
-            startBtn.remove()
-
     }
+
+
+
+var optionsChecker = function(event) {
+    var targetEl = event.target;
+
+    //IF USER CHOOSES ANSWER FROM LAST QUESTION CLEAR THE INTERVAL (THE FUNCTION )
+    if (targetEl.event === "#options17" ||
+    targetEl.event === "#options18" || 
+    targetEl.event === "#options19" || 
+    targetEl.event === "#options20") {
+        clearInterval(startCount)
+    }
+
     // ANSWERS 
     if (targetEl.matches("#option1") 
     || targetEl.matches("#option5") 
@@ -193,10 +206,13 @@ var taskButtonHandler = function(event) {
         }, 400)
         questionsLoop()
         createOptions()
-        debugger
+
     }
 }
 
 
-var body = document.querySelector("body");
-body.addEventListener("click", taskButtonHandler)
+var main = document.querySelector("#main");
+main.addEventListener("click", optionsChecker);
+
+startBtn.addEventListener("click", SetTimeInterval);
+
