@@ -35,6 +35,7 @@ var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
 var contentHolder = document.querySelector("#contentHolder");
 var main = document.querySelector("#main");
+var isComplete = false;
 var score = "";
 var dataId = 1;
 var questionsIndex = 0;
@@ -47,6 +48,7 @@ var questionsLoop = function() {
         return
     }
     if (questionsIndex = questionsArray.length) {
+        isComplete = true;
         title.textContent = "All Done!";
         paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
         paragraph2.remove();
@@ -102,25 +104,27 @@ var stopTimer = function() {
     }
 }
 
+var startingTime = timeLeft.textContent = 10;
+var countDown = startingTime;
+
 var SetTimeInterval =  function() {
+
         // START BTN 
         questionsLoop()
         createOptions()
         var startBtn = document.querySelector("#startBtnHolder");
         startBtn.remove()
 
-        // SetTimeInterval()
         // time here ---------------------------------
-        var startingTime = timeLeft.textContent = 10;
-        var countDown = startingTime;
+
         var startCount = setInterval(() => {
             timeLeft.textContent = `Time Left: ${countDown}`;
             
-            if (countDown > 0) {
-        
-
-                countDown--;
-            } else if (countDown === 0) {
+            if (isComplete === false) {
+                    countDown--;
+            } else if (countDown <= 0) {
+                isComplete = true;
+                countDown = 0;
                 clearInterval(startCount);
                 countDown = startingTime;
                 timeLeft.textContent = `Time's up`;
