@@ -49,33 +49,38 @@ if (questionsIndex < questionsArray.length) {
 }
 if (questionsIndex = questionsArray.length) {
     isComplete = true;
-    title.textContent = "All Done!";
-    paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
-    paragraph2.remove();
-    optionsContainer.innerHTML = "";
-    var createDiv = document.createElement("div");
-    var CreateForm = document.createElement("form");
+    if (isComplete === true) {
+        return
+    }
 
-    var createLabel = document.createElement("label");
-    createLabel.setAttribute("for", "initials");
-    createLabel.textContent = "Enter Initials:";
+    // title.textContent = "All Done!";
+    // paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
+    // paragraph2.remove();
+    // optionsContainer.innerHTML = "";
+    // var createDiv = document.createElement("div");
+    // var CreateForm = document.createElement("form");
 
-    var createInput = document.createElement("input");
-    createInput.setAttribute("id", "initials");
-    createInput.setAttribute("type", "text");
-    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+    // var createLabel = document.createElement("label");
+    // createLabel.setAttribute("for", "initials");
+    // createLabel.textContent = "Enter Initials:";
 
-    var createSubmit = document.createElement("button");
-    createSubmit.setAttribute("id", "submitBtn")
-    createSubmit.textContent = "Submit";
+    // var createInput = document.createElement("input");
+    // createInput.setAttribute("id", "initials");
+    // createInput.setAttribute("type", "text");
+    // createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
 
-    CreateForm.appendChild(createLabel);
-    CreateForm.appendChild(createInput);
-    createDiv.appendChild(CreateForm);
-    contentHolder.appendChild(createDiv);
-    contentHolder.appendChild(createSubmit);
+    // var createSubmit = document.createElement("button");
+    // createSubmit.setAttribute("id", "submitBtn")
+    // createSubmit.textContent = "Submit";
+
+    // CreateForm.appendChild(createLabel);
+    // CreateForm.appendChild(createInput);
+    // createDiv.appendChild(CreateForm);
+    // contentHolder.appendChild(createDiv);
+    // contentHolder.appendChild(createSubmit);
 }
 }
+
 
 var createOptions = function() {
     paragraph2.innerHTML = "";
@@ -165,7 +170,7 @@ var SetTimeInterval =  function() {
                     // isComplete = true;
                     clearInterval(startCount);
                     countDown = startingTime;
-                    timeLeft.textContent = `Time's up`;
+                    timeLeft.textContent = `You beat the clock!`;
     
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
