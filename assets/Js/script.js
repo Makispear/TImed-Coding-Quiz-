@@ -37,6 +37,7 @@ var contentHolder = document.querySelector("#contentHolder");
 var score = "";
 var dataId = 1;
 var questionsIndex = 0;
+var startCount = -1;
 
 var questionsLoop = function() {
     if (questionsIndex < questionsArray.length) {
@@ -101,21 +102,23 @@ var taskButtonHandler = function(event) {
         var startingTime = timeLeft.textContent = 10;
         var countDown = startingTime;
         var startCount = setInterval(() => {
-            timeLeft.textContent = `Time Left: ${startingTime}`;
-
-            if (startingTime > 0) {
+            timeLeft.textContent = `Time Left: ${countDown}`;
+            
+            if (countDown > 0) {
                 if (targetEl.matches("#options17") ||
                 targetEl.matches("#options18") || 
                 targetEl.matches("#options19") || 
                 targetEl.matches("#options20")) {
+                    clearInterval(startCount)
                 }
-                
-                startingTime--;
+                countDown--;
+
             } else {
                 timeLeft.textContent = `Time's up`;
 
+                // CODE FOR SHOWING NEXT PAGE 
                 title.textContent = "All Done!";
-                paragraph1.textContent = `Your final score is ${startingTime}.`;
+                paragraph1.textContent = `Your final score is ${countDown}.`;
                 paragraph2.remove();
                 optionsContainer.innerHTML = "";
                 var createDiv = document.createElement("div");
@@ -140,9 +143,9 @@ var taskButtonHandler = function(event) {
                 createDiv.appendChild(CreateForm);
                 contentHolder.appendChild(createDiv);
                 contentHolder.appendChild(createSubmit);
-
+                
                 clearInterval(startCount)
-                return startingTime;
+                return countDown;
             }
         }, 1000)
 
