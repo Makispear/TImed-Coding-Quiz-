@@ -33,7 +33,6 @@ var optionsContainer = document.querySelector("#optionsContainer");
 var validatorSection = document.querySelector(".validatorSection");
 var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
-// var questionsIndex = 0;
 var dataId = 1;
 var questionsIndex = 0;
 
@@ -41,20 +40,18 @@ var questionsLoop = function() {
     if (questionsIndex < 5) {
         title.textContent = `Question Number ${questionsIndex +1}`;
         paragraph1.textContent = questionsArray[questionsIndex].question;
-        // questionsIndex++;
         return
     }
     if (questionsIndex = 5) {
-        // alert("You have completed the quiz");
         title.textContent = "All Done!";
         paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`
     }
 }
+
 var createOptions = function() {
     paragraph2.innerHTML = "";
     optionsContainer.innerHTML = "";
     for (questionsIndex; questionsIndex < questionsArray.length; questionsIndex++) {
-
             for (let i = 1; i < 5; i++) {
                 var optionsBtn = document.createElement("button");
                 optionsBtn.setAttribute('id', `option${dataId}`);
@@ -64,12 +61,9 @@ var createOptions = function() {
                 optionsContainer.appendChild(optionsBtn);
                
             }
-    // questionsLoop()
     questionsIndex++
     return optionsBtn
     }
-    // questionsIndex++
-
 } 
 
 
