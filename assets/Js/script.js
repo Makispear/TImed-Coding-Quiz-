@@ -6,7 +6,7 @@ var questionsArray = [
     correct: 1},
     // 2
     {question: "A very useful tool for debugging is ________.", 
-    // answer: "debugger;", 
+    // answer: ";", 
     options: {1: "console.log()", 2: "Terminal/Bash", 3: "for loops", 4: "JavaScript"}, 
     correct: 5},
     // 3
@@ -42,40 +42,39 @@ var questionsIndex = 0;
 var startCount = -1;
 
 var questionsLoop = function() {
-    if (questionsIndex < questionsArray.length) {
-        title.textContent = `Question Number ${questionsIndex +1}`;
-        paragraph1.textContent = questionsArray[questionsIndex].question;
-        return
-    }
-    if (questionsIndex = questionsArray.length) {
-        isComplete = true;
-        title.textContent = "All Done!";
-        paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
-        paragraph2.remove();
-        optionsContainer.innerHTML = "";
-        var createDiv = document.createElement("div");
-        var CreateForm = document.createElement("form");
+if (questionsIndex < questionsArray.length) {
+    title.textContent = `Question Number ${questionsIndex +1}`;
+    paragraph1.textContent = questionsArray[questionsIndex].question;
+    return
+}
+if (questionsIndex = questionsArray.length) {
+    isComplete = true;
+    title.textContent = "All Done!";
+    paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
+    paragraph2.remove();
+    optionsContainer.innerHTML = "";
+    var createDiv = document.createElement("div");
+    var CreateForm = document.createElement("form");
 
-        var createLabel = document.createElement("label");
-        createLabel.setAttribute("for", "initials");
-        createLabel.textContent = "Enter Initials:";
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("for", "initials");
+    createLabel.textContent = "Enter Initials:";
 
-        var createInput = document.createElement("input");
-        createInput.setAttribute("id", "initials");
-        createInput.setAttribute("type", "text");
-        createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+    var createInput = document.createElement("input");
+    createInput.setAttribute("id", "initials");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
 
-        var createSubmit = document.createElement("button");
-        createSubmit.setAttribute("id", "submitBtn")
-        createSubmit.textContent = "Submit";
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("id", "submitBtn")
+    createSubmit.textContent = "Submit";
 
-
-        CreateForm.appendChild(createLabel);
-        CreateForm.appendChild(createInput);
-        createDiv.appendChild(CreateForm);
-        contentHolder.appendChild(createDiv);
-        contentHolder.appendChild(createSubmit);
-    }
+    CreateForm.appendChild(createLabel);
+    CreateForm.appendChild(createInput);
+    createDiv.appendChild(CreateForm);
+    contentHolder.appendChild(createDiv);
+    contentHolder.appendChild(createSubmit);
+}
 }
 
 var createOptions = function() {
@@ -104,7 +103,7 @@ var stopTimer = function() {
     }
 }
 
-var startingTime = timeLeft.textContent = 10;
+var startingTime = timeLeft.textContent = 5;
 var countDown = startingTime;
 
 var SetTimeInterval =  function() {
@@ -118,12 +117,14 @@ var SetTimeInterval =  function() {
         // time here ---------------------------------
 
         var startCount = setInterval(() => {
-            timeLeft.textContent = `Time Left: ${countDown}`;
-                
+            timeLeft.textContent = `Time Left: ${countDown - 1}`;
+
             if (isComplete === false) {
+                
                  if (countDown > 0) {
                         countDown--;
                         if (countDown === 0) {
+                            
                     isComplete = true;
 
                     clearInterval(startCount);
@@ -197,6 +198,7 @@ var SetTimeInterval =  function() {
                     clearInterval(startCount)
                     return countDown;
                 }
+
         }, 1000)
     }
 
