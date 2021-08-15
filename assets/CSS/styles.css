@@ -33,7 +33,7 @@ a {
 }
 
 #title {
-    font-size: 30px;
+    font-size: 50px;
 }
 
 #main {
@@ -65,7 +65,7 @@ a {
     margin: 5px;
 }
 
-#startBtn {
+#startBtn,  #submitBtn {
     height: auto;
     width: 200px;
     padding: 10px 20px;
@@ -76,7 +76,7 @@ a {
     border-radius: 12px;
 }
 
-#startBtn:hover, #nextBtn:hover {
+#startBtn:hover, #submitBtn:hover {
     background-color: rgb(107, 74, 110);
 }
 
@@ -101,3 +101,15 @@ a {
 .option-btn:hover {
     background-color: rgb(77, 39, 104);
 }
+
+
+form > * {
+    margin: 10px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    outline: none;
+}
+
