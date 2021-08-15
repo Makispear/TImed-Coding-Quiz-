@@ -34,6 +34,7 @@ var validatorSection = document.querySelector(".validatorSection");
 var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
 var contentHolder = document.querySelector("#contentHolder");
+var score = "";
 var dataId = 1;
 var questionsIndex = 0;
 
@@ -84,7 +85,6 @@ var createOptions = function() {
                 createOptionsBtn.className = "option-btn"
                 createOptionsBtn.textContent = questionsArray[questionsIndex].options[i]
                 optionsContainer.appendChild(createOptionsBtn);
-               
             }
     questionsIndex++
     return createOptionsBtn
@@ -97,21 +97,78 @@ var taskButtonHandler = function(event) {
     var targetEl = event.target;
     // START BTN 
     if (targetEl.matches("#startBtn")) {
+        // time here ---------------------------------
+        var startingTime = timeLeft.textContent = 10;
+        var countDown = startingTime;
+        var startCount = setInterval(() => {
+            timeLeft.textContent = `Time Left: ${startingTime}`;
+
+            if (startingTime > 0) {
+                if (targetEl.matches("#options17") ||
+                targetEl.matches("#options18") || 
+                targetEl.matches("#options19") || 
+                targetEl.matches("#options20")) {
+                }
+                
+                startingTime--;
+            } else {
+                timeLeft.textContent = `Time's up`;
+
+                title.textContent = "All Done!";
+                paragraph1.textContent = `Your final score is ${startingTime}.`;
+                paragraph2.remove();
+                optionsContainer.innerHTML = "";
+                var createDiv = document.createElement("div");
+                var CreateForm = document.createElement("form");
+        
+                var createLabel = document.createElement("label");
+                createLabel.setAttribute("for", "initials");
+                createLabel.textContent = "Enter Initials:";
+        
+                var createInput = document.createElement("input");
+                createInput.setAttribute("id", "initials");
+                createInput.setAttribute("type", "text");
+                createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+        
+                var createSubmit = document.createElement("button");
+                createSubmit.setAttribute("id", "submitBtn")
+                createSubmit.textContent = "Submit";
+        
+        
+                CreateForm.appendChild(createLabel);
+                CreateForm.appendChild(createInput);
+                createDiv.appendChild(CreateForm);
+                contentHolder.appendChild(createDiv);
+                contentHolder.appendChild(createSubmit);
+
+                clearInterval(startCount)
+                return startingTime;
+            }
+        }, 1000)
+
+
+
+
+        //-------------------------------------------
             questionsLoop()
             createOptions()
             var startBtn = document.querySelector("#startBtnHolder");
             startBtn.remove()
-            
+
     }
     // ANSWERS 
-    if (targetEl.matches("#option1") || targetEl.matches("#option5") || targetEl.matches("#option10") || targetEl.matches("#option15") || targetEl.matches("#option19")) {
+    if (targetEl.matches("#option1") 
+    || targetEl.matches("#option5") 
+    || targetEl.matches("#option10") 
+    || targetEl.matches("#option15") 
+    || targetEl.matches("#option19")) {
         checkAnswer.textContent = "CORRECT!";
         setTimeout(function(){
         checkAnswer.textContent = "";
         }, 400)
         questionsLoop()
         createOptions()
-    } else if (targetEl.matches("#option1") ||
+    } else if (
     targetEl.matches("#option2") ||
     targetEl.matches("#option3") ||
     targetEl.matches("#option4") ||
@@ -133,6 +190,7 @@ var taskButtonHandler = function(event) {
         }, 400)
         questionsLoop()
         createOptions()
+        debugger
     }
 }
 
