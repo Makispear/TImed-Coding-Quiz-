@@ -119,47 +119,84 @@ var SetTimeInterval =  function() {
 
         var startCount = setInterval(() => {
             timeLeft.textContent = `Time Left: ${countDown}`;
-            
-            if (isComplete === false) {
-                    countDown--;
-            } else if (countDown <= 0) {
-                isComplete = true;
-                countDown = 0;
-                clearInterval(startCount);
-                countDown = startingTime;
-                timeLeft.textContent = `Time's up`;
-
-                // CODE FOR SHOWING NEXT PAGE 
-                title.textContent = "All Done!";
-                paragraph1.textContent = `Your final score is ${countDown}.`;
-                paragraph2.remove();
-                optionsContainer.innerHTML = "";
-                var createDiv = document.createElement("div");
-                var CreateForm = document.createElement("form");
-        
-                var createLabel = document.createElement("label");
-                createLabel.setAttribute("for", "initials");
-                createLabel.textContent = "Enter Initials:";
-        
-                var createInput = document.createElement("input");
-                createInput.setAttribute("id", "initials");
-                createInput.setAttribute("type", "text");
-                createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
-        
-                var createSubmit = document.createElement("button");
-                createSubmit.setAttribute("id", "submitBtn")
-                createSubmit.textContent = "Submit";
-        
-        
-                CreateForm.appendChild(createLabel);
-                CreateForm.appendChild(createInput);
-                createDiv.appendChild(CreateForm);
-                contentHolder.appendChild(createDiv);
-                contentHolder.appendChild(createSubmit);
                 
-                clearInterval(startCount)
-                return countDown;
-            }
+            if (isComplete === false) {
+                 if (countDown > 0) {
+                        countDown--;
+                        if (countDown === 0) {
+                    isComplete = true;
+
+                    clearInterval(startCount);
+                    countDown = startingTime;
+                    timeLeft.textContent = `Time's up`;
+    
+                    // CODE FOR SHOWING NEXT PAGE 
+                    title.textContent = "All Done!";
+                    paragraph1.textContent = `Your final score is ${countDown}.`;
+                    paragraph2.remove();
+                    optionsContainer.innerHTML = "";
+                    var createDiv = document.createElement("div");
+                    var CreateForm = document.createElement("form");
+            
+                    var createLabel = document.createElement("label");
+                    createLabel.setAttribute("for", "initials");
+                    createLabel.textContent = "Enter Initials:";
+            
+                    var createInput = document.createElement("input");
+                    createInput.setAttribute("id", "initials");
+                    createInput.setAttribute("type", "text");
+                    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+            
+                    var createSubmit = document.createElement("button");
+                    createSubmit.setAttribute("id", "submitBtn")
+                    createSubmit.textContent = "Submit";
+            
+            
+                    CreateForm.appendChild(createLabel);
+                    CreateForm.appendChild(createInput);
+                    createDiv.appendChild(CreateForm);
+                    contentHolder.appendChild(createDiv);
+                    contentHolder.appendChild(createSubmit);
+                    return countDown;
+                        }
+                 }
+            } else if (isComplete === true) {
+                    // isComplete = true;
+                    clearInterval(startCount);
+                    countDown = startingTime;
+                    timeLeft.textContent = `Time's up`;
+    
+                    // CODE FOR SHOWING NEXT PAGE 
+                    title.textContent = "All Done!";
+                    paragraph1.textContent = `Your final score is ${countDown}.`;
+                    paragraph2.remove();
+                    optionsContainer.innerHTML = "";
+                    var createDiv = document.createElement("div");
+                    var CreateForm = document.createElement("form");
+            
+                    var createLabel = document.createElement("label");
+                    createLabel.setAttribute("for", "initials");
+                    createLabel.textContent = "Enter Initials:";
+            
+                    var createInput = document.createElement("input");
+                    createInput.setAttribute("id", "initials");
+                    createInput.setAttribute("type", "text");
+                    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+            
+                    var createSubmit = document.createElement("button");
+                    createSubmit.setAttribute("id", "submitBtn")
+                    createSubmit.textContent = "Submit";
+            
+            
+                    CreateForm.appendChild(createLabel);
+                    CreateForm.appendChild(createInput);
+                    createDiv.appendChild(CreateForm);
+                    contentHolder.appendChild(createDiv);
+                    contentHolder.appendChild(createSubmit);
+                    
+                    clearInterval(startCount)
+                    return countDown;
+                }
         }, 1000)
     }
 
