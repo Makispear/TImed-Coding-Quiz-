@@ -255,15 +255,18 @@ var optionsChecker = function(event) {
     }
 }
 
-var scoreSheet = "";
+// FOR STORING [SCORE, INITIALS] 
+var scoreSheet = [];
 
 var submitScore = function(event) {
     var targetEl = event.target; 
+
     if (targetEl.matches("#submitBtn")) {
         var initials = document.querySelector("#initials").value;
-        console.log(countDown)
-        console.log(initials)
-}
+        var scoreList = {score: `${countDown}`, initials: `${initials}`};
+        scoreSheet.push(scoreList)
+
+    }
 }
 
 
