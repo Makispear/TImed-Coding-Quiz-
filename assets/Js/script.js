@@ -67,7 +67,7 @@ if (questionsIndex = questionsArray.length) {
     // var createInput = document.createElement("input");
     // createInput.setAttribute("id", "initials");
     // createInput.setAttribute("type", "text");
-    // createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+    // createInput.setAttribute("placeholder", "Ex: M.T (for Mike Tyson)");
 
     // var createSubmit = document.createElement("button");
     // createSubmit.setAttribute("id", "submitBtn")
@@ -133,7 +133,7 @@ var SetTimeInterval =  function() {
                     isComplete = true;
 
                     clearInterval(startCount);
-                    countDown = startingTime;
+                    // countDown = startingTime;
                     timeLeft.textContent = `Time's up`;
     
                     // CODE FOR SHOWING NEXT PAGE 
@@ -151,7 +151,7 @@ var SetTimeInterval =  function() {
                     var createInput = document.createElement("input");
                     createInput.setAttribute("id", "initials");
                     createInput.setAttribute("type", "text");
-                    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+                    createInput.setAttribute("placeholder", "Ex: M.T (for Mike Tyson)");
             
                     var createSubmit = document.createElement("button");
                     createSubmit.setAttribute("id", "submitBtn")
@@ -169,7 +169,7 @@ var SetTimeInterval =  function() {
             } else if (isComplete === true) {
                     // isComplete = true;
                     clearInterval(startCount);
-                    countDown = startingTime;
+                    // countDown = startingTime;
                     timeLeft.textContent = `You beat the clock!`;
     
                     // CODE FOR SHOWING NEXT PAGE 
@@ -187,7 +187,7 @@ var SetTimeInterval =  function() {
                     var createInput = document.createElement("input");
                     createInput.setAttribute("id", "initials");
                     createInput.setAttribute("type", "text");
-                    createInput.setAttribute("placeholder", "ex: M.T (for Mike Tyson)");
+                    createInput.setAttribute("placeholder", "Ex: M.T (for Mike Tyson)");
             
                     var createSubmit = document.createElement("button");
                     createSubmit.setAttribute("id", "submitBtn")
@@ -255,15 +255,15 @@ var optionsChecker = function(event) {
     }
 }
 
+var scoreSheet = "";
 
 var submitScore = function(event) {
     var targetEl = event.target; 
     if (targetEl.matches("#submitBtn")) {
-        console.log("submit btn ")
-    }
-    if (targetEl.matches("#initials")) {
-        console.log("1")
-    }
+        var initials = document.querySelector("#initials").value;
+        console.log(countDown)
+        console.log(initials)
+}
 }
 
 
