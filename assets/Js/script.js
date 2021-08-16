@@ -211,7 +211,6 @@ var SetTimeInterval =  function() {
 
 var optionsChecker = function(event) {
     var targetEl = event.target;
-
     //IF USER CHOOSES ANSWER FROM LAST QUESTION CLEAR THE INTERVAL (THE FUNCTION )
     if (targetEl.event === "#options17" ||
     targetEl.event === "#options18" || 
@@ -219,7 +218,6 @@ var optionsChecker = function(event) {
     targetEl.event === "#options20") {
         clearInterval(startCount)
     }
-
     // ANSWERS 
     if (targetEl.matches("#option1") 
     || targetEl.matches("#option5") 
@@ -254,13 +252,25 @@ var optionsChecker = function(event) {
         }, 400)
         questionsLoop()
         createOptions()
+    }
+}
 
+
+var submitScore = function(event) {
+    var targetEl = event.target; 
+    if (targetEl.matches("#submitBtn")) {
+        console.log("submit btn ")
+    }
+    if (targetEl.matches("#initials")) {
+        console.log("1")
     }
 }
 
 
 var main = document.querySelector("#main");
 main.addEventListener("click", optionsChecker);
+
+main.addEventListener('click', submitScore)
 
 startBtn.addEventListener("click", SetTimeInterval);
 
