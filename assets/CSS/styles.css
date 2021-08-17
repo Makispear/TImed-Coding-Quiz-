@@ -4,10 +4,11 @@
     margin: 0;
     font-size: 1.1em;
     font-family: Arial, Helvetica, sans-serif;
+    /* outline: 1px solid green; */
 }
 
 
-li {
+ ul li {
     list-style: none;
 }
 
@@ -65,18 +66,18 @@ a {
     margin: 5px;
 }
 
-#startBtn,  #submitBtn {
+#startBtn,  #submitBtn, #back-btn, #clear-btn  {
     height: auto;
     width: 200px;
     padding: 10px 20px;
     font-size: 25px;
-    margin: auto;
+    margin: 10px;
     background-color: rgb(55, 35, 100);
     color: white;
     border-radius: 12px;
 }
 
-#startBtn:hover, #submitBtn:hover {
+#startBtn:hover, #submitBtn:hover, #back-btn:hover, #clear-btn:hover {
     background-color: rgb(107, 74, 110);
 }
 
@@ -111,5 +112,28 @@ input {
     padding: 10px;
     border-radius: 8px;
     outline: none;
+}
+
+.score-list-container {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 400px;
+}
+
+
+.score-list-item {
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 4px solid rgb(90, 26, 90);
+    background-color: rgb(194, 149, 201);
+
+}
+
+.back-clear-btns {
+    display: flex;
+    justify-content: space-between;
+}
+.back-clear-btns button {
+    margin: 10px
 }
 

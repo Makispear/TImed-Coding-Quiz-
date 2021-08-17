@@ -139,9 +139,9 @@ var SetTimeInterval =  function() {
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
                     paragraph1.textContent = `Your final score is ${countDown}.`;
-                    paragraph2.remove();
+                    paragraph2.textContent = "";
                     optionsContainer.innerHTML = "";
-                    var createDiv = document.createElement("div");
+                    let createDiv = document.createElement("div");
                     var CreateForm = document.createElement("form");
             
                     var createLabel = document.createElement("label");
@@ -175,9 +175,9 @@ var SetTimeInterval =  function() {
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
                     paragraph1.textContent = `Your final score is ${countDown}.`;
-                    paragraph2.remove();
+                    paragraph2.textContent = "";
                     optionsContainer.innerHTML = "";
-                    var createDiv = document.createElement("div");
+                    let createDiv = document.createElement("div");
                     var CreateForm = document.createElement("form");
             
                     var createLabel = document.createElement("label");
@@ -260,12 +260,97 @@ var scoreSheet = [];
 
 var submitScore = function(event) {
     var targetEl = event.target; 
+    var formEl = document.querySelector("form")
+
 
     if (targetEl.matches("#submitBtn")) {
-        var initials = document.querySelector("#initials").value;
+        var inputText = document.querySelector("#initials");
+        var initials = inputText.value;
         var scoreList = {score: `${countDown}`, initials: `${initials}`};
-        scoreSheet.push(scoreList)
+        scoreSheet.push(scoreList);
+        var submitBtn = document.querySelector("#submitBtn");
+        submitBtn.remove();
 
+        //create next page
+        title.textContent = "High scores";
+        paragraph1.textContent = "";
+        paragraph2.textContent = "";
+
+        formEl.remove();
+
+
+        let createDiv = document.createElement("div");
+        createDiv.setAttribute("class", "score-list-div");
+
+        var createOlEl = document.createElement("ol");
+        createOlEl.setAttribute("class", "score-list-container");
+
+        var createScoreList = document.createElement("li");
+        createScoreList.setAttribute("class", "score-list-item");
+        createScoreList.textContent = `${initials} - ${countDown}`;
+
+        // append the scores 
+        createOlEl.appendChild(createScoreList);
+        createDiv.appendChild(createOlEl);
+        contentHolder.appendChild(createDiv);
+
+        // create btns 
+        var createBtnDiv = document.createElement("div");
+        createBtnDiv.setAttribute("class", "back-clear-btns");
+        
+        var backBtn = document.createElement("button")
+        backBtn.setAttribute("id", "back-btn");
+        backBtn.textContent = "back"
+
+        var clearScoresBtn = document.createElement("button");
+        clearScoresBtn.setAttribute("id", "clear-btn");
+        clearScoresBtn.textContent = "Clear Scores";
+
+        // append buttons 
+        createBtnDiv.appendChild(backBtn);
+        createBtnDiv.appendChild(clearScoresBtn);
+        contentHolder.appendChild(createBtnDiv);
+    }
+
+    if (targetEl.matches("#back-btn")) {
+        //refresh page logic
+
+        // title.textContent = "Coding Quiz challenge";
+        // paragraph1.textContent = "Try to answer the following code-related questions within the time limit.";
+        // paragraph2.textContent = "Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+        // let createDiv = document.querySelector(".score-list-div");
+        // createDiv.innerHTML = "";
+        // let buttons = document.querySelector(".back-clear-btns");
+        // buttons.remove();
+
+        // var optionsContainer = document.querySelector("#optionsContainer");
+        // var insertStartbtn = () => {
+        //     var createStartDiv = document.createElement("div");
+        //     createStartDiv.setAttribute("id", "startBtnHolder");
+        //     var createStartBtn = document.createElement("button");
+        //     createStartBtn.textContent = "Start Quiz";
+        //     createStartBtn.setAttribute("id", "startBtn");
+
+        //     createStartDiv.appendChild(createStartBtn);
+        //     debugger
+        //     console.log(createStartDiv)
+        //     debugger
+        //     return createStartDiv
+        // }
+
+        // insertAfter = function (optionsContainer, insertStartbtn) {
+        //     debugger
+        //     optionsContainer.parentNode.insertBefore(insertStartbtn);
+        // }
+
+
+        
+    }
+    if (targetEl.matches("#clear-btn")) {
+        let orderedListEl = document.querySelector(".score-list-container");
+        while (orderedListEl.firstChild) {
+            orderedListEl.removeChild(orderedListEl.firstChild);
+        }
     }
 }
 
