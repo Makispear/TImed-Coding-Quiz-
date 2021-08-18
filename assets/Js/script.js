@@ -244,11 +244,11 @@ var submitScore = function(event) {
         if (localStorage === null) {
             return
         } else if (localStorage.getItem("Score")) {
-            var retrievedData = localStorage.getItem("Score");
-            retrievedData.push(scoreSheet)
-            localStorage.setItem('Score', JSON.stringify(scoreSheet));
+            var retrievedData = JSON.parse(localStorage.getItem("Score"));
+            retrievedData.s
+            localStorage.setItem('Score', JSON.stringify(scoreList));
         }
-        localStorage.setItem('Score', JSON.stringify(scoreSheet));
+        localStorage.setItem('Score', JSON.stringify(scoreList));
 
         //---------------------------------------------------
 
