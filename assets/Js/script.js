@@ -52,35 +52,8 @@ if (questionsIndex = questionsArray.length) {
     if (isComplete === true) {
         return
     }
-
-    // title.textContent = "All Done!";
-    // paragraph1.textContent = `Your final score is ${timeLeft.innerText}.`;
-    // paragraph2.remove();
-    // optionsContainer.innerHTML = "";
-    // var createDiv = document.createElement("div");
-    // var CreateForm = document.createElement("form");
-
-    // var createLabel = document.createElement("label");
-    // createLabel.setAttribute("for", "initials");
-    // createLabel.textContent = "Enter Initials:";
-
-    // var createInput = document.createElement("input");
-    // createInput.setAttribute("id", "initials");
-    // createInput.setAttribute("type", "text");
-    // createInput.setAttribute("placeholder", "Ex: M.T (for Mike Tyson)");
-
-    // var createSubmit = document.createElement("button");
-    // createSubmit.setAttribute("id", "submitBtn")
-    // createSubmit.textContent = "Submit";
-
-    // CreateForm.appendChild(createLabel);
-    // CreateForm.appendChild(createInput);
-    // createDiv.appendChild(CreateForm);
-    // contentHolder.appendChild(createDiv);
-    // contentHolder.appendChild(createSubmit);
 }
 }
-
 
 var createOptions = function() {
     paragraph2.innerHTML = "";
@@ -108,18 +81,15 @@ var stopTimer = function() {
     }
 }
 
-var startingTime = timeLeft.textContent = 5;
+var startingTime = timeLeft.textContent = (questionsArray.length * 10);
 var countDown = startingTime;
 
 var SetTimeInterval =  function() {
-
         // START BTN 
         questionsLoop()
         createOptions()
         var startBtn = document.querySelector("#startBtnHolder");
         startBtn.remove()
-
-        // time here ---------------------------------
 
         var startCount = setInterval(() => {
             timeLeft.textContent = `Time Left: ${countDown - 1}`;
@@ -128,7 +98,7 @@ var SetTimeInterval =  function() {
                 
                  if (countDown > 0) {
                         countDown--;
-                        if (countDown === 0) {
+                        if (countDown <= 0) {
                             
                     isComplete = true;
 
@@ -207,8 +177,6 @@ var SetTimeInterval =  function() {
         }, 1000)
     }
 
-
-
 var optionsChecker = function(event) {
     var targetEl = event.target;
     //IF USER CHOOSES ANSWER FROM LAST QUESTION CLEAR THE INTERVAL (THE FUNCTION )
@@ -246,6 +214,7 @@ var optionsChecker = function(event) {
     targetEl.matches("#option17") ||
     targetEl.matches("#option18") ||
     targetEl.matches("#option20")) {
+        countDown = countDown -10
         checkAnswer.textContent = "WRONG!";
         setTimeout(function(){
             checkAnswer.textContent = "";
@@ -259,6 +228,7 @@ var optionsChecker = function(event) {
 var scoreSheet = [];
 
 var submitScore = function(event) {
+    event.preventDefault()
     var targetEl = event.target; 
     var formEl = document.querySelector("form")
 
@@ -267,7 +237,21 @@ var submitScore = function(event) {
         var inputText = document.querySelector("#initials");
         var initials = inputText.value;
         var scoreList = {score: `${countDown}`, initials: `${initials}`};
-        scoreSheet.push(scoreList);
+
+
+        // testing here ------------------------------
+
+        if (localStorage === null) {
+            return
+        } else if (localStorage.getItem("Score")) {
+            var retrievedData = localStorage.getItem("Score");
+            retrievedData.push(scoreSheet)
+            localStorage.setItem('Score', JSON.stringify(scoreSheet));
+        }
+        localStorage.setItem('Score', JSON.stringify(scoreSheet));
+
+        //---------------------------------------------------
+
         var submitBtn = document.querySelector("#submitBtn");
         submitBtn.remove();
 
@@ -343,7 +327,7 @@ var submitScore = function(event) {
         //     optionsContainer.parentNode.insertBefore(insertStartbtn);
         // }
 
-
+        location.reload()
         
     }
     if (targetEl.matches("#clear-btn")) {
@@ -351,6 +335,7 @@ var submitScore = function(event) {
         while (orderedListEl.firstChild) {
             orderedListEl.removeChild(orderedListEl.firstChild);
         }
+        localStorage.clear();
     }
 }
 
