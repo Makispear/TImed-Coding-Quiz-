@@ -40,7 +40,6 @@ var score = "";
 var dataId = 1;
 var questionsIndex = 0;
 var startCount = -1;
-var zero = 0;
 
 var questionsLoop = function() {
 if (questionsIndex < questionsArray.length) {
@@ -145,7 +144,7 @@ var SetTimeInterval =  function() {
     
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
-                    paragraph1.textContent = `Your final score is ${zero}.`;
+                    paragraph1.textContent = `Your final score is ${countDown}.`;
                     paragraph2.textContent = "";
                     optionsContainer.innerHTML = "";
                     let createDiv = document.createElement("div");
@@ -226,7 +225,27 @@ var optionsChecker = function(event) {
 }
 
 // FOR STORING [SCORE, INITIALS] 
-var retrievedData = JSON.parse(localStorage.getItem("Score"))
+// var retrievedData = [];
+// if (localStorage.getItem("scores")) {
+//    retrievedData =  retrievedData.JSON.parse(localStorage.getItem("scores"))
+// }
+
+//============================================================================================================
+// -------------------------------
+var retrievedData = function() {
+    var retrievedData = JSON.parse(localStorage.getItem("scores"));
+    if (!retrievedData) {
+      var retrievedData = []
+      return retrievedData
+    }
+    forEach(retrievedData, function(score, initials) {
+    var retrievedData = retrievedData[score][initials]
+      });
+      return retrievedData
+    };
+  
+
+//=======================================
 
 
 var submitScore = function(event) {
@@ -236,29 +255,16 @@ var submitScore = function(event) {
 
 
     if (targetEl.matches("#submitBtn")) {
-        var inputText = document.querySelector("#initials").value;
-        inputText = inputText.trim()
-        var score = countDown;
-        console.log(inputText)
-        console.log(score)
-
-        if (retrievedData === null) {
-            var scoreListObj = {};
-            scoreListObj["score"] = countDown;  
-            scoreListObj["initials"] = inputText;
-            retrievedData.push(scoreListObj)
-            console.log(retrievedData)
-        }
-
-
-
-        
-        
+        var initials = document.querySelector("#initials").value;
+        var scoreList = {score: `${countDown}`, initials: `${initials}`};
 
 
         // testing here ------------------------------
+        // localStorage.setItem("scores:", JSON score)
 
-       
+
+
+
         //---------------------------------------------------
 
         var submitBtn = document.querySelector("#submitBtn");
@@ -305,12 +311,11 @@ var submitScore = function(event) {
         contentHolder.appendChild(createBtnDiv);
     }
 
-    // REFRESHING THE PAGE
     if (targetEl.matches("#back-btn")) {
+        //refresh page logic
         location.reload()
+        
     }
-
-    // CLEARING SCORES
     if (targetEl.matches("#clear-btn")) {
         let orderedListEl = document.querySelector(".score-list-container");
         while (orderedListEl.firstChild) {
@@ -321,10 +326,11 @@ var submitScore = function(event) {
 }
 
 
+
+
 var main = document.querySelector("#main");
 main.addEventListener("click", optionsChecker);
 
 main.addEventListener('click', submitScore)
 
 startBtn.addEventListener("click", SetTimeInterval);
-
