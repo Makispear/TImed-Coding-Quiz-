@@ -266,22 +266,17 @@ var submitScore = function(event) {
         for (let i=0; i < retrievedData.length; i++) {
 
             // credit: https://stackoverflow.com/questions/16243366/sorting-array-with-numbers-without-sort-method/16243667
-            () => {
-                var done = false;
-                while (!done) {
-                  done = true;
-                  for (var i = 1; i < retrievedData.length; i++) {
-                    if (retrievedData[i - 1].score < retrievedData[i].score) {
-                      done = false;
-                      var temp = retrievedData[i + 1];
-                      retrievedData[i + 1] = retrievedData[i].score;
-                      retrievedData[i] = temp;
-                    }
-                  }
+            var compare = (a, b) => {
+                if (a.retrievedData[i].score < b.retrievedData[i].score){
+                  return -1;
                 }
-              
-                return retrievedData;
+                if (a.retrievedData[i].score > b.retrievedData[i].score){
+                  return 1;
+                }
+                return 0;
               }
+              
+              retrievedData.sort(compare);
 
             var createScoreList = document.createElement("li");
             createScoreList.setAttribute("class", "score-list-item");
