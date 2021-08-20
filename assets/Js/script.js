@@ -33,6 +33,7 @@ var optionsContainer = document.querySelector("#optionsContainer");
 var validatorSection = document.querySelector(".validatorSection");
 var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
+var main = document.querySelector("#main");
 var contentHolder = document.querySelector("#contentHolder");
 var main = document.querySelector("#main");
 var isComplete = false;
@@ -192,6 +193,7 @@ var optionsChecker = function(event) {
     || targetEl.matches("#option10") 
     || targetEl.matches("#option15") 
     || targetEl.matches("#option19")) {
+        countDown = countDown + 10
         checkAnswer.textContent = "CORRECT!";
         setTimeout(function(){
         checkAnswer.textContent = "";
@@ -214,7 +216,7 @@ var optionsChecker = function(event) {
     targetEl.matches("#option17") ||
     targetEl.matches("#option18") ||
     targetEl.matches("#option20")) {
-        countDown = countDown -10
+        countDown = countDown - 10
         checkAnswer.textContent = "WRONG!";
         setTimeout(function(){
             checkAnswer.textContent = "";
@@ -224,49 +226,27 @@ var optionsChecker = function(event) {
     }
 }
 
-// FOR STORING [SCORE, INITIALS] 
-// var retrievedData = [];
-// if (localStorage.getItem("scores")) {
-//    retrievedData =  retrievedData.JSON.parse(localStorage.getItem("scores"))
-// }
+//=============================================
 
-//============================================================================================================
-// -------------------------------
-var retrievedData = function() {
-    var retrievedData = JSON.parse(localStorage.getItem("scores"));
-    if (!retrievedData) {
-      var retrievedData = []
-      return retrievedData
-    }
-    forEach(retrievedData, function(score, initials) {
-    var retrievedData = retrievedData[score][initials]
-      });
-      return retrievedData
-    };
-  
-
-//=======================================
-
+//===============================================
 
 var submitScore = function(event) {
     event.preventDefault()
     var targetEl = event.target; 
     var formEl = document.querySelector("form")
 
-
+    //IF SUBMIT BTN IS PRESSED
     if (targetEl.matches("#submitBtn")) {
         var initials = document.querySelector("#initials").value;
         var scoreList = {score: `${countDown}`, initials: `${initials}`};
 
+        // SETTING UP LOCAL STORAGE 
+        var retrievedData = JSON.parse(localStorage.getItem("Scores")) || [];
+        console.log(retrievedData)
+        retrievedData.push(scoreList);
+        localStorage.setItem("Scores", JSON.stringify(retrievedData));
 
-        // testing here ------------------------------
-        // localStorage.setItem("scores:", JSON score)
-
-
-
-
-        //---------------------------------------------------
-
+        
         var submitBtn = document.querySelector("#submitBtn");
         submitBtn.remove();
 
@@ -326,9 +306,6 @@ var submitScore = function(event) {
 }
 
 
-
-
-var main = document.querySelector("#main");
 main.addEventListener("click", optionsChecker);
 
 main.addEventListener('click', submitScore)
