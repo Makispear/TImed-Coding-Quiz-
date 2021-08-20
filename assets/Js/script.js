@@ -270,11 +270,11 @@ var submitScore = function(event) {
                 var done = false;
                 while (!done) {
                   done = true;
-                  for (var i = 1; i < retrievedData.length; i += 1) {
-                    if (retrievedData[i - 1].score > retrievedData[i].score) {
+                  for (var i = 1; i < retrievedData.length; i++) {
+                    if (retrievedData[i - 1].score < retrievedData[i].score) {
                       done = false;
-                      var temp = retrievedData[i - 1];
-                      retrievedData[i - 1] = retrievedData[i].score;
+                      var temp = retrievedData[i + 1];
+                      retrievedData[i + 1] = retrievedData[i].score;
                       retrievedData[i] = temp;
                     }
                   }
