@@ -240,7 +240,7 @@ var submitScore = function(event) {
         var initials = document.querySelector("#initials").value;
         var scoreList = {score: `${countDown}`, initials: `${initials}`};
 
-        // SETTING UP LOCAL STORAGE 
+        // LOCAL STORAGE 
         var retrievedData = JSON.parse(localStorage.getItem("Scores")) || [];
         console.log(retrievedData)
         retrievedData.push(scoreList);
@@ -254,24 +254,46 @@ var submitScore = function(event) {
         title.textContent = "High scores";
         paragraph1.textContent = "";
         paragraph2.textContent = "";
+            formEl.remove();
 
-        formEl.remove();
 
-
-        let createDiv = document.createElement("div");
-        createDiv.setAttribute("class", "score-list-div");
+        let ScoreListContainer = document.createElement("div");
+        ScoreListContainer.setAttribute("class", "score-list-div");
 
         var createOlEl = document.createElement("ol");
         createOlEl.setAttribute("class", "score-list-container");
 
-        var createScoreList = document.createElement("li");
-        createScoreList.setAttribute("class", "score-list-item");
-        createScoreList.textContent = `${initials} - ${countDown}`;
+        for (let i=0; i < retrievedData.length; i++) {
+
+            // credit: https://stackoverflow.com/questions/16243366/sorting-array-with-numbers-without-sort-method/16243667
+            () => {
+                var done = false;
+                while (!done) {
+                  done = true;
+                  for (var i = 1; i < retrievedData.length; i += 1) {
+                    if (retrievedData[i - 1].score > retrievedData[i].score) {
+                      done = false;
+                      var temp = retrievedData[i - 1];
+                      retrievedData[i - 1] = retrievedData[i].score;
+                      retrievedData[i] = temp;
+                    }
+                  }
+                }
+              
+                return retrievedData;
+              }
+
+            var createScoreList = document.createElement("li");
+            createScoreList.setAttribute("class", "score-list-item");
+            createScoreList.textContent = `${retrievedData[i].initials} - ${retrievedData[i].score}`;
+            // createScoreList.textContent = `${initials} - ${countDown}`;
+            createOlEl.appendChild(createScoreList);
+
+        }
 
         // append the scores 
-        createOlEl.appendChild(createScoreList);
-        createDiv.appendChild(createOlEl);
-        contentHolder.appendChild(createDiv);
+        ScoreListContainer.appendChild(createOlEl);
+        contentHolder.appendChild(ScoreListContainer);
 
         // create btns 
         var createBtnDiv = document.createElement("div");
@@ -280,7 +302,6 @@ var submitScore = function(event) {
         var backBtn = document.createElement("button")
         backBtn.setAttribute("id", "back-btn");
         backBtn.textContent = "back"
-
         var clearScoresBtn = document.createElement("button");
         clearScoresBtn.setAttribute("id", "clear-btn");
         clearScoresBtn.textContent = "Clear Scores";
@@ -289,6 +310,7 @@ var submitScore = function(event) {
         createBtnDiv.appendChild(backBtn);
         createBtnDiv.appendChild(clearScoresBtn);
         contentHolder.appendChild(createBtnDiv);
+
     }
 
     if (targetEl.matches("#back-btn")) {
