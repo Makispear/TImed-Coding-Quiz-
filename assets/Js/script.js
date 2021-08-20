@@ -40,6 +40,7 @@ var score = "";
 var dataId = 1;
 var questionsIndex = 0;
 var startCount = -1;
+var zero = 0;
 
 var questionsLoop = function() {
 if (questionsIndex < questionsArray.length) {
@@ -144,7 +145,7 @@ var SetTimeInterval =  function() {
     
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
-                    paragraph1.textContent = `Your final score is ${countDown}.`;
+                    paragraph1.textContent = `Your final score is ${zero}.`;
                     paragraph2.textContent = "";
                     optionsContainer.innerHTML = "";
                     let createDiv = document.createElement("div");
@@ -225,7 +226,8 @@ var optionsChecker = function(event) {
 }
 
 // FOR STORING [SCORE, INITIALS] 
-var scoreSheet = [];
+var retrievedData = JSON.parse(localStorage.getItem("Score"))
+
 
 var submitScore = function(event) {
     event.preventDefault()
@@ -234,22 +236,29 @@ var submitScore = function(event) {
 
 
     if (targetEl.matches("#submitBtn")) {
-        var inputText = document.querySelector("#initials");
-        var initials = inputText.value;
-        var scoreList = {score: `${countDown}`, initials: `${initials}`};
+        var inputText = document.querySelector("#initials").value;
+        inputText = inputText.trim()
+        var score = countDown;
+        console.log(inputText)
+        console.log(score)
+
+        if (retrievedData === null) {
+            var scoreListObj = {};
+            scoreListObj["score"] = countDown;  
+            scoreListObj["initials"] = inputText;
+            retrievedData.push(scoreListObj)
+            console.log(retrievedData)
+        }
+
+
+
+        
+        
 
 
         // testing here ------------------------------
 
-        if (localStorage === null) {
-            return
-        } else if (localStorage.getItem("Score")) {
-            var retrievedData = JSON.parse(localStorage.getItem("Score"));
-            retrievedData.s
-            localStorage.setItem('Score', JSON.stringify(scoreList));
-        }
-        localStorage.setItem('Score', JSON.stringify(scoreList));
-
+       
         //---------------------------------------------------
 
         var submitBtn = document.querySelector("#submitBtn");
@@ -296,40 +305,12 @@ var submitScore = function(event) {
         contentHolder.appendChild(createBtnDiv);
     }
 
+    // REFRESHING THE PAGE
     if (targetEl.matches("#back-btn")) {
-        //refresh page logic
-
-        // title.textContent = "Coding Quiz challenge";
-        // paragraph1.textContent = "Try to answer the following code-related questions within the time limit.";
-        // paragraph2.textContent = "Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
-        // let createDiv = document.querySelector(".score-list-div");
-        // createDiv.innerHTML = "";
-        // let buttons = document.querySelector(".back-clear-btns");
-        // buttons.remove();
-
-        // var optionsContainer = document.querySelector("#optionsContainer");
-        // var insertStartbtn = () => {
-        //     var createStartDiv = document.createElement("div");
-        //     createStartDiv.setAttribute("id", "startBtnHolder");
-        //     var createStartBtn = document.createElement("button");
-        //     createStartBtn.textContent = "Start Quiz";
-        //     createStartBtn.setAttribute("id", "startBtn");
-
-        //     createStartDiv.appendChild(createStartBtn);
-        //     debugger
-        //     console.log(createStartDiv)
-        //     debugger
-        //     return createStartDiv
-        // }
-
-        // insertAfter = function (optionsContainer, insertStartbtn) {
-        //     debugger
-        //     optionsContainer.parentNode.insertBefore(insertStartbtn);
-        // }
-
         location.reload()
-        
     }
+
+    // CLEARING SCORES
     if (targetEl.matches("#clear-btn")) {
         let orderedListEl = document.querySelector(".score-list-container");
         while (orderedListEl.firstChild) {
