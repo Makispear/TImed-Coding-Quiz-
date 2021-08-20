@@ -121,7 +121,7 @@ var SetTimeInterval =  function() {
             
                     var createInput = document.createElement("input");
                     createInput.setAttribute("id", "initials");
-                    createInput.setAttribute("type", "text");
+                    createInput.setAttribute("type", "text")
                     createInput.setAttribute("placeholder", "Ex: M.T (for Mike Tyson)");
             
                     var createSubmit = document.createElement("button");
@@ -263,20 +263,13 @@ var submitScore = function(event) {
         var createOlEl = document.createElement("ol");
         createOlEl.setAttribute("class", "score-list-container");
 
-        for (let i=0; i < retrievedData.length; i++) {
+        for (let i = 0; i < retrievedData.length; i++) {
 
             // credit: https://stackoverflow.com/questions/16243366/sorting-array-with-numbers-without-sort-method/16243667
-            var compare = (a, b) => {
-                if (a.retrievedData[i].score < b.retrievedData[i].score){
-                  return -1;
-                }
-                if (a.retrievedData[i].score > b.retrievedData[i].score){
-                  return 1;
-                }
-                return 0;
-              }
-              
-              retrievedData.sort(compare);
+            function compare(a, b) {
+                return b.score - a.score
+            }
+            retrievedData.sort(compare);
 
             var createScoreList = document.createElement("li");
             createScoreList.setAttribute("class", "score-list-item");
@@ -305,7 +298,6 @@ var submitScore = function(event) {
         createBtnDiv.appendChild(backBtn);
         createBtnDiv.appendChild(clearScoresBtn);
         contentHolder.appendChild(createBtnDiv);
-
     }
 
     if (targetEl.matches("#back-btn")) {
