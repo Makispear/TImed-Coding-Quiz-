@@ -33,7 +33,6 @@ var optionsContainer = document.querySelector("#optionsContainer");
 var validatorSection = document.querySelector(".validatorSection");
 var checkAnswer = document.querySelector("#checkAnswer");
 var timeLeft = document.querySelector("#timeLeft");
-var main = document.querySelector("#main");
 var contentHolder = document.querySelector("#contentHolder");
 var main = document.querySelector("#main");
 var isComplete = false;
@@ -226,14 +225,25 @@ var optionsChecker = function(event) {
     }
 }
 
-//=============================================
+// SORTING SCORES 
+function compare(a, b) {
+    return b.score - a.score
+}
 
-//===============================================
+var pageAfterSubmit = () => {
+    var submitBtn = document.querySelector("#submitBtn");
+    submitBtn.remove();
+    var formEl = document.querySelector("form")
+    formEl.remove();
+    title.textContent = "High scores";
+    paragraph1.textContent = "";
+    paragraph2.textContent = "";
+} 
 
-var submitScore = function(event) {
+
+var taskHandler = function(event) {
     event.preventDefault()
     var targetEl = event.target; 
-    var formEl = document.querySelector("form")
 
     //IF SUBMIT BTN IS PRESSED
     if (targetEl.matches("#submitBtn")) {
@@ -242,41 +252,23 @@ var submitScore = function(event) {
 
         // LOCAL STORAGE 
         var retrievedData = JSON.parse(localStorage.getItem("Scores")) || [];
-        console.log(retrievedData)
         retrievedData.push(scoreList);
         localStorage.setItem("Scores", JSON.stringify(retrievedData));
 
-        
-        var submitBtn = document.querySelector("#submitBtn");
-        submitBtn.remove();
-
-        //create next page
-        title.textContent = "High scores";
-        paragraph1.textContent = "";
-        paragraph2.textContent = "";
-            formEl.remove();
-
+        pageAfterSubmit()
 
         let ScoreListContainer = document.createElement("div");
         ScoreListContainer.setAttribute("class", "score-list-div");
 
         var createOlEl = document.createElement("ol");
         createOlEl.setAttribute("class", "score-list-container");
-
         for (let i = 0; i < retrievedData.length; i++) {
-
-            // credit: https://stackoverflow.com/questions/16243366/sorting-array-with-numbers-without-sort-method/16243667
-            function compare(a, b) {
-                return b.score - a.score
-            }
             retrievedData.sort(compare);
-
-            var createScoreList = document.createElement("li");
+            let createScoreList = document.createElement("li");
             createScoreList.setAttribute("class", "score-list-item");
-            createScoreList.textContent = `${retrievedData[i].initials} - ${retrievedData[i].score}`;
+            createScoreList.textContent = `(${retrievedData[i].score}) ${retrievedData[i].initials}`;
             // createScoreList.textContent = `${initials} - ${countDown}`;
             createOlEl.appendChild(createScoreList);
-
         }
 
         // append the scores 
@@ -287,12 +279,12 @@ var submitScore = function(event) {
         var createBtnDiv = document.createElement("div");
         createBtnDiv.setAttribute("class", "back-clear-btns");
         
-        var backBtn = document.createElement("button")
-        backBtn.setAttribute("id", "back-btn");
-        backBtn.textContent = "back"
         var clearScoresBtn = document.createElement("button");
         clearScoresBtn.setAttribute("id", "clear-btn");
         clearScoresBtn.textContent = "Clear Scores";
+        var backBtn = document.createElement("button")
+        backBtn.setAttribute("id", "back-btn");
+        backBtn.textContent = "back"
 
         // append buttons 
         createBtnDiv.appendChild(backBtn);
@@ -312,11 +304,52 @@ var submitScore = function(event) {
         }
         localStorage.clear();
     }
+     
 }
+
+
+//-------------------------------------------------------
+
+
+// var title2 = document.querySelector("#title2");
+// var contentHolder2 = document.querySelector("#contentHolder2");
+
+// var scorePage = () => {
+//     contentHolder2.innerHTML = "";
+//     var initials = document.querySelector("#initials").value;
+//     var scoreList = {score: `${countDown}`, initials: `${initials}`};
+
+//     // LOCAL STORAGE 
+//     var retrievedData = JSON.parse(localStorage.getItem("Scores")) || [];
+//     retrievedData.push(scoreList);
+//     localStorage.setItem("Scores", JSON.stringify(retrievedData));
+
+//     let ScoreListContainer = document.createElement("div");
+//     ScoreListContainer.setAttribute("class", "score-list-div-2");
+
+//     var createOlEl = document.createElement("ol");
+//     createOlEl.setAttribute("class", "score-list-container-2");
+//     for (let i = 0; i < retrievedData.length; i++) {
+//         retrievedData.sort(compare);
+//         let createScoreList = document.createElement("li");
+//         createScoreList.setAttribute("class", "score-list-item-2");
+//         createScoreList.textContent = `(${retrievedData[i].score}) ${retrievedData[i].initials}`;
+//         // createScoreList.textContent = `${initials} - ${countDown}`;
+//         createOlEl.appendChild(createScoreList);
+//     }
+//     // append the scores 
+//     ScoreListContainer.appendChild(createOlEl);
+//     contentHolder2.appendChild(ScoreListContainer);
+// }
+// setInterval(scorePage, 1000);
+
+//-------------------------------------------------------
+
+    
 
 
 main.addEventListener("click", optionsChecker);
 
-main.addEventListener('click', submitScore)
+main.addEventListener('click', taskHandler)
 
 startBtn.addEventListener("click", SetTimeInterval);

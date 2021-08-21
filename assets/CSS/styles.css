@@ -16,16 +16,17 @@ a {
     text-decoration: none;
 }
 
+
 #header {
     padding: 20px;
     box-shadow: 2px 2px 10px rgb(73, 71, 71);
 }
 
-#headerUlEl {
+#headerUlEl, a {
     display: flex;
     justify-content: space-between;
     flex-flow: row nowrap;
-    color: rgb(78, 14, 78);
+    color: rgb(126, 10, 126);
     font-weight: bold;
 }
 
@@ -33,7 +34,7 @@ a {
     max-width: 800px;
 }
 
-#title {
+#title, #title2 {
     font-size: 50px;
 }
 
@@ -55,7 +56,7 @@ a {
 }
 
 
-#contentHolder {
+#contentHolder, #contentHolder2 {
     display: flex;
     flex-flow: column nowrap;
 }
@@ -66,7 +67,7 @@ a {
     margin: 5px;
 }
 
-#startBtn,  #submitBtn, #back-btn, #clear-btn  {
+#startBtn,  #submitBtn, #back-btn {
     height: auto;
     width: 200px;
     padding: 10px 20px;
@@ -77,8 +78,23 @@ a {
     border-radius: 12px;
 }
 
-#startBtn:hover, #submitBtn:hover, #back-btn:hover, #clear-btn:hover {
+#clear-btn, #clear-btn-2 {
+    height: auto;
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 25px;
+    margin: 10px;
+    background-color: rgb(133, 13, 23);
+    color: white;
+    border-radius: 12px;
+}
+
+#startBtn:hover, #submitBtn:hover {
     background-color: rgb(107, 74, 110);
+}
+
+#clear-btn:hover,  #clear-btn-2:hover {
+    background-color: rgb(187, 23, 23);
 }
 
 #optionsContainer {
@@ -114,20 +130,21 @@ input {
     outline: none;
 }
 
-.score-list-container {
+.score-list-container, .score-list-container-2 {
     display: flex;
     flex-flow: column nowrap;
     width: 400px;
 }
 
 
-.score-list-item {
+.score-list-item, .score-list-item-2 {
     margin: 5px;
     padding: 5px;
     border-bottom: 4px solid rgb(90, 26, 90);
     background-color: rgb(194, 149, 201);
-
+    text-align: left;
 }
+
 
 .back-clear-btns {
     display: flex;
