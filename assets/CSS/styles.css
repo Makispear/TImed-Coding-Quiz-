@@ -38,7 +38,7 @@ a {
     font-size: 50px;
 }
 
-#main {
+#main, #main2 {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -46,7 +46,7 @@ a {
     margin: 100px auto;
 }
 
-#main > * {
+#main > *, #main2 > * {
     margin: 20px;
 }
 
@@ -61,11 +61,16 @@ a {
     flex-flow: column nowrap;
 }
 
-#contentHolder > * {
+#contentHolder > *{
     align-self: center;
     width: auto;
     margin: 5px;
 }
+
+#contentHolder2 > * {
+    align-self: center;
+    margin: auto;
+} 
 
 #startBtn,  #submitBtn, #back-btn {
     height: auto;

@@ -235,7 +235,7 @@ var pageAfterSubmit = () => {
     submitBtn.remove();
     var formEl = document.querySelector("form")
     formEl.remove();
-    title.textContent = "High scores";
+    title.textContent = "HIGH SCORES";
     paragraph1.textContent = "";
     paragraph2.textContent = "";
 } 
@@ -306,46 +306,6 @@ var taskHandler = function(event) {
     }
      
 }
-
-
-//-------------------------------------------------------
-
-
-// var title2 = document.querySelector("#title2");
-// var contentHolder2 = document.querySelector("#contentHolder2");
-
-// var scorePage = () => {
-//     contentHolder2.innerHTML = "";
-//     var initials = document.querySelector("#initials").value;
-//     var scoreList = {score: `${countDown}`, initials: `${initials}`};
-
-//     // LOCAL STORAGE 
-//     var retrievedData = JSON.parse(localStorage.getItem("Scores")) || [];
-//     retrievedData.push(scoreList);
-//     localStorage.setItem("Scores", JSON.stringify(retrievedData));
-
-//     let ScoreListContainer = document.createElement("div");
-//     ScoreListContainer.setAttribute("class", "score-list-div-2");
-
-//     var createOlEl = document.createElement("ol");
-//     createOlEl.setAttribute("class", "score-list-container-2");
-//     for (let i = 0; i < retrievedData.length; i++) {
-//         retrievedData.sort(compare);
-//         let createScoreList = document.createElement("li");
-//         createScoreList.setAttribute("class", "score-list-item-2");
-//         createScoreList.textContent = `(${retrievedData[i].score}) ${retrievedData[i].initials}`;
-//         // createScoreList.textContent = `${initials} - ${countDown}`;
-//         createOlEl.appendChild(createScoreList);
-//     }
-//     // append the scores 
-//     ScoreListContainer.appendChild(createOlEl);
-//     contentHolder2.appendChild(ScoreListContainer);
-// }
-// setInterval(scorePage, 1000);
-
-//-------------------------------------------------------
-
-    
 
 
 main.addEventListener("click", optionsChecker);
