@@ -104,7 +104,7 @@ var SetTimeInterval =  function() {
 
                     clearInterval(startCount);
                     // countDown = startingTime;
-                    timeLeft.textContent = `Time's up`;
+                    timeLeft.textContent = `Time's up: 0`;
     
                     // CODE FOR SHOWING NEXT PAGE 
                     title.textContent = "All Done!";
